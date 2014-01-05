@@ -1,0 +1,147 @@
+
+    <div id="bundle-info" class="">
+        <div class="bundle-left-container">
+            <p id="bundle-category"> <a href="#/projects">Projects</a> </p>
+            <h1 id="bundle-title">Javascript Libraries</h1>
+            <h2 id="bundle-description"></h2>
+        </div>
+        <div class="bundle-middle-container">
+            <div class="bundle-info-container" style="width: 100px;height: 130px;">
+                <a href="#/chart" class="shortcut-side">
+                    <div class="chart-thumbnail">
+                        <img src="img/chart.png" alt="Charts">
+                    </div>
+                    <div class="description">
+                        <h3>Charts</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="bundle-right-container">
+            <div class="bundle-info-container">
+                <div class="bundle-info-img-container"> <a href="#" class="bundle-author-avatar-img" >
+                    <div style="background: #D87A7A url('img/avatar_background.png') bottom no-repeat; background-size: contain;"></div>
+                </a> </div>
+                <div class="bundle-authors"> <a href="#" >Bhupal Lambodhar</a> </div>
+                <a id="nav-cart" href="#/cart" class="nav_a nav-button-outer nav-menu-active" alt="Shopping Cart">
+                    <span class="nav-button-mid nav-sprite">
+                        <span class="nav-button-inner nav-sprite">
+                            <span class="nav-button-title nav-button-line1"> </span>
+                            <span class="nav-button-title nav-button-line2">Cart</span>
+                            <span class="nav-cart-button nav-sprite"></span>
+                            <span id="nav-cart-count" class="nav-cart-0">{{items.length}}</span>
+                         </span>
+                    </span>
+                    <span class="nav-down-arrow nav-sprite"></span>
+                </a>
+                <div class="bundle-stats">
+                    <ul>
+                        <li id="bundle-stats-views" tooltip="You visited - 5 times" tooltip-placement="bottom"> <i class="icon-eye-open"></i> <b>5</b> </li>
+                        <li id="bundle-stats-clips" tooltip="Total size of {{items.length}} files" tooltip-placement="bottom"> <i class="icon-file"/> Total File Size: <b>{{totalSize(items)}}MB</b> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="bundle-controls">
+        <div id="bundle-controls-clips" class="controls-left-container">
+           <div class="tool-category">
+               <span class="tool-category-label">Sort By</span>
+               <div class="btn-group">
+                   <button class="btn btn-mini">{{sorttype}}</button>
+                   <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                       <span class="caret"></span>
+                   </button>
+                   <ul class="dropdown-menu">
+                       <li ng-model="sorttype"><a href ng-click="setSortType('Project Name')">Project Name</a></li>
+                       <li ng-model="sorttype"><a href ng-click="setSortType('Description')">Description</a></li>
+                       <li ng-model="sorttype"><a href ng-click="setSortType('Author')">Author</a></li>
+                       <li ng-model="sorttype"><a href ng-click="setSortType('Creation Date')">Creation Date</a></li>
+                       <li ng-model="sorttype"><a href ng-click="setSortType('Website')">Website</a></li>
+                       <li ng-model="sorttype"><a href ng-click="setSortType('File Size')">File Size</a></li>
+                   </ul>
+                   <button type="button" class="btn" ng-model="sortorder" btn-radio="'ASC'" ng-click="setSortOrder('ASC')">
+                       <i class="icon-chevron-up" tooltip-placement="bottom" tooltip="Ascending Order"></i>
+                   </button>
+                   <button type="button" class="btn" ng-model="sortorder" btn-radio="'DESC'" ng-click="setSortOrder('DESC')">
+                       <i class="icon-chevron-down" tooltip-placement="bottom" tooltip="Descending Order"></i>
+                   </button>
+                   <button type="button" class="btn" ng-model="sortorder" btn-radio="'NO'" ng-click="setSortOrder('NO')">
+                       <i class="icon-refresh" tooltip-placement="bottom" tooltip="No Order"></i>
+                   </button>
+               </div>
+           </div>
+           <div class="tool-category">
+               <span class="tool-category-label">Search By</span>
+               <div class="btn-group">
+                   <button class="btn btn-mini">{{searchtype}}</button>
+                   <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+                       <span class="caret"></span>
+                   </button>
+                   <ul class="dropdown-menu">
+                       <li ng-model="searchtype"><a href ng-click="setSearchType('Any')">Any</a></li>
+                       <li ng-model="searchtype"><a href ng-click="setSearchType('Project Name')">Project Name</a></li>
+                       <li ng-model="searchtype"><a href ng-click="setSearchType('Description')">Description</a></li>
+                       <li ng-model="searchtype"><a href ng-click="setSearchType('Author')">Author</a></li>
+                       <li ng-model="searchtype"><a href ng-click="setSearchType('Creation Date')">Creation Date</a></li>
+                       <li ng-model="searchtype"><a href ng-click="setSearchType('Website')">Website</a></li>
+                       <li ng-model="searchtype"><a href ng-click="setSearchType('File Size')">File Size</a></li>
+                   </ul>
+               </div>
+               <div style="float: right; margin-top: -5px;">
+                   <form class="navbar-search" method="get" action="#/search" id="search">
+                       <input type="submit" class="icon-search" disabled="disabled" value="">
+                       <input type="text" ng-model="search.$" ng-show="searchAny" placeholder="Search ..." class="search-query" name="q" >
+                       <input type="text" ng-model="search.name" ng-show="searchName" placeholder="Search ..." class="search-query" name="q" >
+                       <input type="text" ng-model="search.description" ng-show="searchDesc" placeholder="Search ..." class="search-query" name="q" >
+                       <input type="text" ng-model="search.author" ng-show="searchAuthor" placeholder="Search ..." class="search-query" name="q" >
+                       <input type="text" ng-model="search.creationDate" ng-show="searchCreationDate" placeholder="Search ..." class="search-query" name="q" >
+                       <input type="text" ng-model="search.size" ng-show="searchSize" placeholder="Search ..." class="search-query" name="q" >
+                       <input type="text" ng-model="search.site" ng-show="searchSite" placeholder="Search ..." class="search-query" name="q" >
+                   </form>
+               </div>
+           </div>
+        </div>
+        <div id="bundle-controls-search" class="controls-right-container">
+            <div class="pull-right" style="margin-left: 25px;">
+                <a href="#/newProject" class="btn btn-warning"><i class="icon-plus-sign icon-white" style="margin-right: 2px;"/>Add Project</a>
+            </div>
+        </div>
+    </div>
+    <div id="bundle-clips" class="wrapper-element">
+        <ul id="bundle-clips-list" class="bundle-clips-list-grid">
+            <li class="clip clip-grid clip-html clip-Engadget " ng-repeat="project in projects| filter:search:strict | orderBy:performsort:reversesorting">
+                <div class="clip-content ellipsis">
+                    <div class="clip-content-header">
+                        <h2 class="clip-title ellipsis pull-left"> {{project.name}} </h2>
+                        <div class="btn-toolbar pull-right" style="position: relative;top: -10px;">
+                            <div class="btn-group">
+                                <a class="btn" href="#/editProject/{{project.id}}" tooltip-placement="bottom" tooltip="View/Edit">
+                                    <i class="icon-list-alt"></i>
+                                </a>
+                                <a class="btn" href ng-click="addToCart(project)" tooltip-placement="bottom" tooltip="Add To Cart">
+                                    <i class="icon-shopping-cart"></i>
+                                </a>
+                                <a class="btn" href="#" ng-click="deleteProject(project.id)" tooltip-placement="bottom" tooltip="Delete">
+                                    <i class="icon-trash"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clip-description">{{project.description}}</div>
+                    <div class="clip-author-name">{{project.author}}</div>
+                    <div class="clip-status">{{project.creationDate}}</div>
+                    <div class="clip-html"><a href="{{project.site}}" target="_blank">{{project.site}}</a></div>
+                </div>
+                <div class="clip-footer">
+                    <div class="clip-footer-element clip-favicon-container">
+                        <i class="icon-file" />
+                        {{project.size}}MB
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div id="pagination" class="infinite-scroll-pagination">
+
+        </div>
+    </div>

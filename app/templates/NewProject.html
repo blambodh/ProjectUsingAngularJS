@@ -1,0 +1,64 @@
+<div style="padding-left:20px; padding-right:20px">
+    <div class="container" >
+        <h1 ng-hide="editingProject">New Project</h1>
+        <h1 ng-show="editingProject">Edit Project</h1>
+        <hr/>
+        <form name="editProjectForm" class="elements-form form-horizontal">
+            <div class="control-group" ng-class="{error: editProjectForm.projectName.$invalid}">
+                <label for="projectName">Project Name:</label>
+                <div class="controls">
+                    <input id="projectName" name="projectName" type="text" required placeholder="Name of project..." ng-model="project.name" />
+                    <span ng-show="editProjectForm.projectName.$error.required" class="help-inline">Required</span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{error: editProjectForm.siteUrl.$invalid}">
+                <label for="siteUrl">Website:</label>
+                <div class="controls">
+                    <input id="siteUrl" name="siteUrl" type="url" required class="input-xlarge" placeholder="Site URL..." ng-model="project.site" />
+                    <span ng-show="editProjectForm.siteUrl.$error.required" class="help-inline">Required</span>
+                    <span ng-show="editProjectForm.siteUrl.$error.url" class="help-inline">Not a URL</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="projectDesc">Description:</label>
+                <div class="controls">
+                    <textarea id="projectDesc" name="projectDesc"  rows="3" cols="20" placeholder="project description..." ng-model="project.description" />
+                </div>
+            </div>
+            <div class="control-group" ng-class="{error: editProjectForm.projectAuthor.$invalid}">
+                <label for="projectAuthor">Author:</label>
+                <div class="controls">
+                    <input id="projectAuthor" name="projectAuthor" type="text" required placeholder="project Author..." ng-model="project.author" />
+                    <span ng-show="editProjectForm.projectAuthor.$error.required" class="help-inline">Required</span>
+                </div>
+            </div>
+            <div class="control-group" ng-class="{error: editProjectForm.creationDate.$invalid}">
+                <label for="creationDate">Creation Date:</label>
+                <div class="controls">
+                    <input id="creationDate" name="creationDate" type="text" required ng-pattern="/\d\d/\d\d/\d\d\d\d/" placeholder="format (mm/dd/yyyy)..." ng-model="project.creationDate"/>
+                    <span ng-show="editProjectForm.creationDate.$error.required" class="help-inline">Required</span>
+                    <span ng-show="editProjectForm.creationDate.$invalid" class="help-inline">Invalid Date format (mm/dd/yyyy)</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="fileSize">File Size:</label>
+                <div class="controls">
+                    <select id="fileSize" name="fileSize" type="text" required placeholder="file size (in MB)..." ng-model="project.size" class="input-small">
+                        <option selected="selected" value="1">1 MB</option>
+                        <option value="2">2 MB</option>
+                        <option value="3">3 MB</option>
+                        <option value="4">4 MB</option>
+                        <option value="5">5 MB</option>
+                    </select>
+                </div>
+            </div>
+
+            <br />
+            <br />
+
+            <button class="btn btn-warning btn-xlarge" ng-disabled="editProjectForm.$invalid" ng-click="saveProject(project, editProjectForm)">Save</button>
+            <button class="btn btn-default" ng-click="cancelEdit()">Cancel</button>
+
+        </form>
+    </div>
+</div>

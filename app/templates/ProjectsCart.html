@@ -1,0 +1,23 @@
+<div class="container">
+    <h3>Javascript Projects Cart</h3>
+    <table class="table">
+        <tr>
+
+            <th>Name</th>
+            <th>Description</th>
+            <th>File Size</th>
+            <th></th>
+        </tr>
+        <tr ng:repeat="item in items">
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.size}}MB</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td style="text-align:right; font-weight:bold;">Total Size:</td>
+            <td style="text-align:left; font-weight:bold;">{{totalSize(items)}}MB</td>
+        </tr>
+    </table>
+    <button ng-click="backToProjects()" class="btn btn-xlarge btn-warning">Back To Projects</button>
+</div>
